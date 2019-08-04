@@ -1,11 +1,12 @@
 package com.github.alonwang.springlifecycle;
 
-import lombok.extern.java.Log;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
+
+import lombok.extern.java.Log;
 
 @Log
 @Component
@@ -16,7 +17,8 @@ public class SimpleBeanPostProcessor implements BeanPostProcessor {
      * or a custom init-method). The bean will already be populated with property values.
      * The returned bean instance may be a wrapper around the original.
      * <p>The default implementation returns the given {@code bean} as-is.
-     * @param bean the new bean instance
+     *
+     * @param bean     the new bean instance
      * @param beanName the name of the bean
      * @return the bean instance to use, either the original or a wrapped one;
      * if {@code null}, no subsequent BeanPostProcessors will be invoked
@@ -25,7 +27,9 @@ public class SimpleBeanPostProcessor implements BeanPostProcessor {
      */
     @Nullable
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        log.info("beanPostProcessor: ----------before initialization----["+bean.getClass().getSimpleName()+"]-----["+beanName+"]-------");
+        if (bean instanceof SimpleBean) {
+            log.info(String.format("beanPostProcessor: ----------before initialization----[" + bean.getClass().getSimpleName() + "]-----[" + beanName + "]-------value: %s", ((SimpleBean) bean).getValue()));
+        }
         return bean;
     }
 
@@ -42,7 +46,8 @@ public class SimpleBeanPostProcessor implements BeanPostProcessor {
      * {@link InstantiationAwareBeanPostProcessor#postProcessBeforeInstantiation} method,
      * in contrast to all other BeanPostProcessor callbacks.
      * <p>The default implementation returns the given {@code bean} as-is.
-     * @param bean the new bean instance
+     *
+     * @param bean     the new bean instance
      * @param beanName the name of the bean
      * @return the bean instance to use, either the original or a wrapped one;
      * if {@code null}, no subsequent BeanPostProcessors will be invoked
@@ -51,8 +56,10 @@ public class SimpleBeanPostProcessor implements BeanPostProcessor {
      * @see org.springframework.beans.factory.FactoryBean
      */
     @Nullable
-     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        log.info("beanPostProcessor: ----------after initialization----["+bean.getClass().getSimpleName()+"]-----["+beanName+"]-------");
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        if (bean instanceof SimpleBean) {
+            log.info(String.format("beanPostProcessor: ----------after initialization----[" + bean.getClass().getSimpleName() + "]-----[" + beanName + "]-------value: %s", ((SimpleBean) bean).getValue()));
+        }
         return bean;
     }
 }

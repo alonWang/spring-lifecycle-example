@@ -1,18 +1,19 @@
 package com.github.alonwang.springlifecycle;
 
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import lombok.extern.java.Log;
 
 @Log
 @Component
 public class SimpleCommandLineRunner implements CommandLineRunner {
     @Autowired
-    private SimpleAspectBean simpleAspectBean;
+    private SimpleBean simpleBean;
     @Override
     public void run(String... args) throws Exception {
-        simpleAspectBean.aroundMethod();
+        simpleBean.aroundMethod();
 
     }
 }
