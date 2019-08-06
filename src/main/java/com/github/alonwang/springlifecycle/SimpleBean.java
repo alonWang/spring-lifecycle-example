@@ -1,5 +1,6 @@
 package com.github.alonwang.springlifecycle;
 
+import org.slf4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanFactory;
@@ -23,16 +24,14 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import lombok.extern.java.Log;
 
-@Log
 @Component
 public class SimpleBean implements EnvironmentAware, BeanFactoryAware, ApplicationContextAware, BeanClassLoaderAware, ApplicationEventPublisherAware, BeanNameAware, ResourceLoaderAware, MessageSourceAware, InitializingBean, DisposableBean {
     @Value("${bean.value}")
     private String value;
-
+    private static final Logger logger = LoggerManager.getLogger(SimpleBean.class);
     public SimpleBean() {
-        log.info(String.format("SimpleBean init-------value: %s", value));
+        logger.info(String.format("SimpleBean init-------value: %s", value));
     }
 
     public String getValue() {
@@ -45,7 +44,7 @@ public class SimpleBean implements EnvironmentAware, BeanFactoryAware, Applicati
     }
 
     private void logInfo(String progress, Object object) {
-        log.info("Aware :--------------[" + progress + "]:[" + object.getClass().getSimpleName() + "]--------------");
+        logger.info("Aware :--------------[" + progress + "]:[" + object.getClass().getSimpleName() + "]--------------");
 
     }
 
@@ -86,25 +85,25 @@ public class SimpleBean implements EnvironmentAware, BeanFactoryAware, Applicati
 
     @PostConstruct
     public void init() {
-        log.info(String.format("SimpleBean--init--value: %s", value));
+        logger.info(String.format("SimpleBean--init--value: %s", value));
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        log.info(String.format("SimpleBean--afterPropertiesSet--value: %s", value));
+        logger.info(String.format("SimpleBean--afterPropertiesSet--value: %s", value));
     }
 
     @PreDestroy
     public void preDestroy() {
-        log.info(String.format("SimpleBean--preDestroy--value: %s", value));
+        logger.info(String.format("SimpleBean--preDestroy--value: %s", value));
     }
 
     @Override
     public void destroy() throws Exception {
-        log.info(String.format("SimpleBean--destroy--value: %s", value));
+        logger.info(String.format("SimpleBean--destroy--value: %s", value));
     }
 
     public void aroundMethod() {
-        log.info("aspectBean : --------- target method invoke------------");
+        logger.info("aspectBean : --------- target method invoke------------");
     }
 }

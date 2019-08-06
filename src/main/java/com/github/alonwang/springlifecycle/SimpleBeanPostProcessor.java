@@ -1,16 +1,15 @@
 package com.github.alonwang.springlifecycle;
 
+import org.slf4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
-import lombok.extern.java.Log;
-
-@Log
 @Component
 public class SimpleBeanPostProcessor implements BeanPostProcessor {
+    private static final Logger logger = LoggerManager.getLogger(SimpleBeanPostProcessor.class);
     /**
      * Apply this BeanPostProcessor to the given new bean instance <i>before</i> any bean
      * initialization callbacks (like InitializingBean's {@code afterPropertiesSet}
@@ -28,7 +27,7 @@ public class SimpleBeanPostProcessor implements BeanPostProcessor {
     @Nullable
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         if (bean instanceof SimpleBean) {
-            log.info(String.format("beanPostProcessor: ----------before initialization----[" + bean.getClass().getSimpleName() + "]-----[" + beanName + "]-------value: %s", ((SimpleBean) bean).getValue()));
+            logger.info(String.format("beanPostProcessor: ----------before initialization----[" + bean.getClass().getSimpleName() + "]-----[" + beanName + "]-------value: %s", ((SimpleBean) bean).getValue()));
         }
         return bean;
     }
@@ -58,7 +57,7 @@ public class SimpleBeanPostProcessor implements BeanPostProcessor {
     @Nullable
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (bean instanceof SimpleBean) {
-            log.info(String.format("beanPostProcessor: ----------after initialization----[" + bean.getClass().getSimpleName() + "]-----[" + beanName + "]-------value: %s", ((SimpleBean) bean).getValue()));
+            logger.info(String.format("beanPostProcessor: ----------after initialization----[" + bean.getClass().getSimpleName() + "]-----[" + beanName + "]-------value: %s", ((SimpleBean) bean).getValue()));
         }
         return bean;
     }

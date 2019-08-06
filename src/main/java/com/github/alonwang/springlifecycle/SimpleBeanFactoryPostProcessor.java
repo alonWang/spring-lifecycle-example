@@ -1,14 +1,14 @@
 package com.github.alonwang.springlifecycle;
 
-import lombok.extern.java.Log;
+import org.slf4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.stereotype.Component;
 
-@Log
 @Component
 public class SimpleBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
+    private static final Logger logger = LoggerManager.getLogger(SimpleBeanFactoryPostProcessor.class);
     /**
      * Modify the application context's internal bean factory after its standard
      * initialization. All bean definitions will have been loaded, but no beans
@@ -20,6 +20,6 @@ public class SimpleBeanFactoryPostProcessor implements BeanFactoryPostProcessor 
      */
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        log.info("beanFactoryPostProcessor: ----------------[" + beanFactory.getClass().getSimpleName() + "]------------------");
+        logger.info("beanFactoryPostProcessor: ----------------[" + beanFactory.getClass().getSimpleName() + "]------------------");
     }
 }
