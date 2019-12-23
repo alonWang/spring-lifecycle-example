@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SimpleCommandLineRunner implements CommandLineRunner {
-    private static final Logger logger = LoggerManager.getLogger(SimpleBeanPostProcessor.class);
+    private static final Logger logger = LoggerManager.getLogger(SimpleCommandLineRunner.class);
     @Autowired
     private SimpleBean simpleBean;
     @Override

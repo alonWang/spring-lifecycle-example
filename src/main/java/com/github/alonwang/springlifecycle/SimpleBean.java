@@ -27,11 +27,16 @@ import javax.annotation.PreDestroy;
 
 @Component
 public class SimpleBean implements EnvironmentAware, BeanFactoryAware, ApplicationContextAware, BeanClassLoaderAware, ApplicationEventPublisherAware, BeanNameAware, ResourceLoaderAware, MessageSourceAware, InitializingBean, DisposableBean {
+    private static final Logger logger = LoggerManager.getLogger(SimpleBean.class);
     @Value("${bean.value}")
     private String value;
-    private static final Logger logger = LoggerManager.getLogger(SimpleBean.class);
+
     public SimpleBean() {
-        logger.info(String.format("SimpleBean init-------value: %s", value));
+        logger.info(String.format("SimpleBean constructor-------value: %s", value));
+    }
+
+    static {
+        logger.info("SimpleBean class instantiation-------");
     }
 
     public String getValue() {

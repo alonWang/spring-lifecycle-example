@@ -1,7 +1,7 @@
 package com.github.alonwang.springlifecycle;
 
+import org.apache.logging.slf4j.Log4jLoggerFactory;
 import org.slf4j.Logger;
-import org.slf4j.impl.Log4jLoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
