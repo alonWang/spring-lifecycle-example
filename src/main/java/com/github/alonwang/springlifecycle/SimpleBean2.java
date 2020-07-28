@@ -1,23 +1,12 @@
 package com.github.alonwang.springlifecycle;
 
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import org.slf4j.Logger;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanClassLoaderAware;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
-import org.springframework.context.EnvironmentAware;
-import org.springframework.context.MessageSource;
-import org.springframework.context.MessageSourceAware;
-import org.springframework.context.ResourceLoaderAware;
+import org.springframework.context.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
@@ -27,14 +16,12 @@ import javax.annotation.PreDestroy;
 
 
 @Component
-public class SimpleBean implements EnvironmentAware, BeanFactoryAware, ApplicationContextAware, BeanClassLoaderAware, ApplicationEventPublisherAware, BeanNameAware, ResourceLoaderAware, MessageSourceAware, InitializingBean, DisposableBean {
-    private static final Logger logger = LoggerManager.getLogger(SimpleBean.class);
+public class SimpleBean2 implements EnvironmentAware, BeanFactoryAware, ApplicationContextAware, BeanClassLoaderAware, ApplicationEventPublisherAware, BeanNameAware, ResourceLoaderAware, MessageSourceAware, InitializingBean, DisposableBean {
+    private static final Logger logger = LoggerManager.getLogger(SimpleBean2.class);
     @Value("${bean.value}")
     private String value;
-    @Autowired
-    private SimpleBean2 simpleBean2;
 
-    public SimpleBean() {
+    public SimpleBean2() {
         logger.info(String.format("SimpleBean constructor-------value: %s", value));
     }
 

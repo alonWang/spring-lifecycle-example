@@ -5,7 +5,7 @@ Configuration:
     Console:
       name: Console
       PatternLayout:
-        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [%C{1}.%M(%F:%L)] - %msg%n"
+        Pattern: "[%-5level] - %msg%n"
   Loggers:
     Root:
       level: info
