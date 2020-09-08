@@ -1,5 +1,6 @@
 package com.github.alonwang.springlifecycle;
 
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import org.slf4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
@@ -15,16 +16,12 @@ import javax.annotation.PreDestroy;
 
 
 @Component
-public class SimpleBean implements EnvironmentAware, BeanFactoryAware, ApplicationContextAware, BeanClassLoaderAware, ApplicationEventPublisherAware, BeanNameAware, ResourceLoaderAware, MessageSourceAware, InitializingBean, DisposableBean {
-    @Autowired
-    private ApplicationContext applicationContext;
-    private static final Logger logger = LoggerManager.getLogger(SimpleBean.class);
+public class SimpleBean2 implements EnvironmentAware, BeanFactoryAware, ApplicationContextAware, BeanClassLoaderAware, ApplicationEventPublisherAware, BeanNameAware, ResourceLoaderAware, MessageSourceAware, InitializingBean, DisposableBean {
+    private static final Logger logger = LoggerManager.getLogger(SimpleBean2.class);
     @Value("${bean.value}")
     private String value;
-    @Autowired
-    private SimpleBean2 simpleBean2;
 
-    public SimpleBean() {
+    public SimpleBean2() {
         logger.info(String.format("SimpleBean constructor-------value: %s", value));
     }
 
