@@ -9,7 +9,6 @@ public class SpringLifecycleApplication {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = SpringApplication.run(SpringLifecycleApplication.class, args);
-        ApplicationContext another = applicationContext.getBean(ApplicationContext.class);
     }
 
 }
